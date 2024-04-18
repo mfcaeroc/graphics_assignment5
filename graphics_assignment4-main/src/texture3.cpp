@@ -30,6 +30,7 @@ int xpos = 0;
 int ypos = 0;
 int zpos = 0;
 int mode = ROTATE;
+int numTreasures = 0;
 
 enum class blocktype {
    rock,
@@ -70,6 +71,10 @@ void read_maze()
    int randomNum1y = rand() % 10 + 1;
    int randomNum2x = rand() % 10 + 1;
    int randomNum2y = rand() % 10 + 1;
+   int randomNum3x = rand() % 10 + 1;
+   int randomNum3y = rand() % 10 + 1;
+   int randomNum4x = rand() % 10 + 1;
+   int randomNum4y = rand() % 10 + 1;
 
    ifstream file("maze.txt");
    string fileLine;
@@ -107,15 +112,26 @@ void read_maze()
             {
                maze[i][j].type = blocktype::gems;
             }
+            else if(randomNum3x == i && randomNum3y == j)
+            {
+               maze[i][j].type = blocktype::gold;
+            }
+            else if(randomNum4x == i && randomNum4y == j)
+            {
+               maze[i][j].type = blocktype::gems;
+            }
             else
             {
                maze[i][j].type = blocktype::nothing;
             }
+
          }
       }
+      maze[1][8].type = blocktype::gold;
    }
    file.close();
 }
+
 
 //---------------------------------------
 // Initialize texture image
@@ -631,7 +647,6 @@ void gems(float xmin, float ymin, float zmin,
            float xmax, float ymax, float zmax)
 {
       // Init texture
-   //int xdim, ydim;
    //unsigned char *texture;
    //init_texture((char *)"textures/rock.jpg", texture, xdim, ydim);
    glEnable(GL_TEXTURE_2D);
@@ -727,7 +742,8 @@ void gold(float xmin, float ymin, float zmin,
            float xmax, float ymax, float zmax)
 {
       // Init texture
-   //int xdim, ydim;
+   //int xdim = xdim / 2;
+   //int ydim = ydim / 2;
    //unsigned char *texture;
    //init_texture((char *)"textures/rock.jpg", texture, xdim, ydim);
    glEnable(GL_TEXTURE_2D);
@@ -844,6 +860,7 @@ void init()
 //---------------------------------------
 void draw_maze()
 {
+   glTranslatef(-mazeSizeX/2, -mazeSizeY/2, 0);
    for(int i = 0; i < 10; i++)
    {
       for(int j=0; j < 10; j++)
@@ -895,8 +912,6 @@ void display()
 
    draw_maze();
 
-   // Draw objects
-   // block(-1, -1, -1, 1, 1, 1);
    glFlush();
 }
 
@@ -954,30 +969,66 @@ void keyboard(unsigned char key, int x, int y)
    }
 
    if(key == 'w') {
-      if(maze[playerStartX][playerStartY+1].type == blocktype::nothing)
+      if(maze[playerStartX][playerStartY+1].type == blocktype::gems ||
+         maze[playerStartX][playerStartY+1].type == blocktype::gold)
+      {
+         maze[playerStartX][playerStartY+1].type = blocktype::nothing;
+         playerStartY++;
+         numTreasures++;
+         printf("Number of Treasures: %d\n", numTreasures);
+      }
+      else if (maze[playerStartX][playerStartY+1].type == blocktype::nothing)
       {
          playerStartY++;
       }
+   
    }
    else if(key == 's') {
-      if(maze[playerStartX][playerStartY-1].type == blocktype::nothing)
+      if(maze[playerStartX][playerStartY-1].type == blocktype::gems ||
+         maze[playerStartX][playerStartY-1].type == blocktype::gold)
+      {
+         maze[playerStartX][playerStartY-1].type = blocktype::nothing;
+         playerStartY--;
+         numTreasures++;
+         printf("Number of Treasures: %d\n", numTreasures);
+      }
+      else if (maze[playerStartX][playerStartY-1].type == blocktype::nothing)
       {
          playerStartY--;
       }
+   
    }
    else if(key == 'a') {
-      if(maze[playerStartX-1][playerStartY].type == blocktype::nothing)
+      if(maze[playerStartX-1][playerStartY].type == blocktype::gems ||
+         maze[playerStartX-1][playerStartY].type == blocktype::gold)
+      {
+         maze[playerStartX-1][playerStartY].type = blocktype::nothing;
+         playerStartX--;
+         numTreasures++;
+         printf("Number of Treasures: %d\n", numTreasures);
+      }
+      else if (maze[playerStartX-1][playerStartY].type == blocktype::nothing)
       {
          playerStartX--;
       }
+   
    }
    else if(key == 'd') {
-      if(maze[playerStartX+1][playerStartY].type == blocktype::nothing)
+      if(maze[playerStartX+1][playerStartY].type == blocktype::gems ||
+         maze[playerStartX+1][playerStartY].type == blocktype::gold)
+      {
+         maze[playerStartX+1][playerStartY].type = blocktype::nothing;
+         playerStartX++;
+         numTreasures++;
+         printf("Number of Treasures: %d\n", numTreasures);
+      }
+      else if (maze[playerStartX+1][playerStartY].type == blocktype::nothing)
       {
          playerStartX++;
       }
    
    }
+   glutPostRedisplay();
 }
 
 //---------------------------------------
@@ -1035,6 +1086,10 @@ int main(int argc, char *argv[])
     printf("   'X' - rotate or translate on x-axis +5\n");
     printf("   'y' - rotate or translate on y-axis -5\n");
     printf("   'Y' - rotate or translate on y-axis +5\n");
+    printf("   'w' - move up\n");
+    printf("   's' - move down\n");
+    printf("   'a' - move left\n");
+    printf("   'd' - move right\n");
     printf("Mouse operations:\n");
     printf("   'mouse down' - start selecting rotation direction\n");
     printf("   'mouse up' - finish selecting rotation direction\n");
