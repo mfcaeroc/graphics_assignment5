@@ -165,10 +165,6 @@ void init_texture(char *name, unsigned char *&texture, int &xdim, int &ydim)
 void brick(float xmin, float ymin, float zmin,
            float xmax, float ymax, float zmax)
 {
-      // Init texture
-   //int xdim, ydim;
-   //unsigned char *texture;
-   //init_texture((char *)"textures/brick.jpg", texture, xdim, ydim);
    glEnable(GL_TEXTURE_2D);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, xdim, ydim, 0, GL_RGB, GL_UNSIGNED_BYTE, brick_texture);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -261,10 +257,6 @@ void brick(float xmin, float ymin, float zmin,
 void wood(float xmin, float ymin, float zmin,
            float xmax, float ymax, float zmax)
 {
-      // Init texture
-   //int xdim, ydim;
-   //unsigned char *texture;
-   //init_texture((char *)"textures/wood.jpg", texture, xdim, ydim);
    glEnable(GL_TEXTURE_2D);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, xdim, ydim, 0, GL_RGB, GL_UNSIGNED_BYTE, wood_texture);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -357,10 +349,6 @@ void wood(float xmin, float ymin, float zmin,
 void rock(float xmin, float ymin, float zmin,
            float xmax, float ymax, float zmax)
 {
-      // Init texture
-   //int xdim, ydim;
-   //unsigned char *texture;
-   //init_texture((char *)"textures/rock.jpg", texture, xdim, ydim);
    glEnable(GL_TEXTURE_2D);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, xdim, ydim, 0, GL_RGB, GL_UNSIGNED_BYTE, rock_texture);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -453,10 +441,6 @@ void rock(float xmin, float ymin, float zmin,
 void gravel(float xmin, float ymin, float zmin,
            float xmax, float ymax, float zmax)
 {
-   // Init texture
-   // int xdim, ydim;
-   // unsigned char *texture;
-   // init_texture((char *)"textures/gravel.jpg", texture, xdim, ydim);
    glEnable(GL_TEXTURE_2D);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, xdim, ydim, 0, GL_RGB, GL_UNSIGNED_BYTE, gravel_texture);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -550,10 +534,6 @@ void gravel(float xmin, float ymin, float zmin,
 void yellow(float xmin, float ymin, float zmin,
            float xmax, float ymax, float zmax)
 {
-      // Init texture
-   //int xdim, ydim;
-   //unsigned char *texture;
-   //init_texture((char *)"textures/rock.jpg", texture, xdim, ydim);
    glEnable(GL_TEXTURE_2D);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, xdim, ydim, 0, GL_RGB, GL_UNSIGNED_BYTE, yellow_texture);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -646,9 +626,6 @@ void yellow(float xmin, float ymin, float zmin,
 void gems(float xmin, float ymin, float zmin,
            float xmax, float ymax, float zmax)
 {
-      // Init texture
-   //unsigned char *texture;
-   //init_texture((char *)"textures/rock.jpg", texture, xdim, ydim);
    glEnable(GL_TEXTURE_2D);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, xdim, ydim, 0, GL_RGB, GL_UNSIGNED_BYTE, gems_texture);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -741,11 +718,6 @@ void gems(float xmin, float ymin, float zmin,
 void gold(float xmin, float ymin, float zmin,
            float xmax, float ymax, float zmax)
 {
-      // Init texture
-   //int xdim = xdim / 2;
-   //int ydim = ydim / 2;
-   //unsigned char *texture;
-   //init_texture((char *)"textures/rock.jpg", texture, xdim, ydim);
    glEnable(GL_TEXTURE_2D);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, xdim, ydim, 0, GL_RGB, GL_UNSIGNED_BYTE, gold_texture);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
